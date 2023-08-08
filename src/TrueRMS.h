@@ -31,9 +31,11 @@
 #define TrueRMS_H_
 
 #include "Arduino.h"
+#include <stdint.h>
 
 #define ADC_8BIT 8 // ADC bit depth
 #define ADC_10BIT 10
+#define ADC_11BIT 11
 #define ADC_12BIT 12
 
 #define BLR_ON 1 // baseline restore switch option
@@ -46,7 +48,7 @@
 class Average
 {
 public:
-	void begin(float _range, unsigned char _avgWindow, unsigned char _adcNob, bool _mode);
+	void begin(float _range, uint32_t _avgWindow, uint8_t _adcNob, bool _mode);
 	void start(void);
 	void stop(void);
 	void update(int _instVal);
@@ -60,7 +62,7 @@ private:
 	int avgWindow;
 	float scaling;
 	short sampleIdx;
-	long temp_sumInstVal;
+	uint64_t temp_sumInstVal;
 	long sumInstVal;
 };
 
@@ -69,7 +71,7 @@ private:
 class Rms
 {
 public:
-	void begin(float _range, unsigned char _rmsWindow, unsigned char _adcNob, bool _blr, bool _mode);
+	void begin(float _range, uint32_t _rmsWindow, uint8_t _adcNob, bool _blr, bool _mode);
 	void start(void);
 	void stop(void);
 	void update(int _instVal);
@@ -82,10 +84,10 @@ public:
 private:
 	bool blr; // baseline restoration switch
 	bool mode;
-	int rmsWindow;
+	uint32_t rmsWindow;
 	float const alpha=0.7; // baseline restoration filter constant
 	int error;
-	short sampleIdx;
+	uint32_t sampleIdx;
 	float scaling;
 	float scalingSq;
 	float msVal;
@@ -100,7 +102,7 @@ private:
 class Rms2
 {
 public:
-	void begin(float _range, unsigned char _rmsWindow, unsigned char _adcNob, bool _blr, bool _mode);
+	void begin(float _range, uint32_t _rmsWindow, uint8_t _adcNob, bool _blr, bool _mode);
 	void start(void);
 	void stop(void);
 	void update(int _instVal);
@@ -116,7 +118,7 @@ private:
 	int rmsWindow;
 	float const alpha=0.7;
 	int error;
-	short sampleIdx;
+	uint32_t sampleIdx;
 	float scaling;
 	float scalingSq;
 	float msVal;
@@ -131,7 +133,7 @@ private:
 class Power
 {
 public:
-	void begin(float _range1, float _range2, unsigned char _rmsWindow, unsigned char _adcNob, bool _blr, bool _mode);
+	void begin(float _range1, float _range2, uint32_t _rmsWindow, uint8_t _adcNob, bool _blr, bool _mode);
 	void start(void);
 	void stop(void);
 	void update(int _instVal1, int _instVal2);
@@ -184,7 +186,7 @@ private:
 class Power2
 {
 public:
-	void begin(float _range1, float _range2, unsigned char _rmsWindow, unsigned char _adcNob, bool _blr, bool _mode);
+	void begin(float _range1, float _range2, uint32_t _rmsWindow, uint8_t _adcNob, bool _blr, bool _mode);
 	void start(void);
 	void stop(void);
 	void update1(int _instVal);

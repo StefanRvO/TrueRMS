@@ -60,7 +60,7 @@
 
 //*********** Init functions ***********//
 
-void Average::begin(float _range, unsigned char _avgWindow, unsigned char _adcNob, bool _mode) {
+void Average::begin(float _range, uint32_t _avgWindow, uint8_t _adcNob, bool _mode) {
 	mode = _mode;
 	avgWindow = _avgWindow;
 	scaling = _range / (float)(_avgWindow * pow(2, _adcNob));
@@ -69,29 +69,29 @@ void Average::begin(float _range, unsigned char _avgWindow, unsigned char _adcNo
 }
 
 
-void Rms::begin(float _range, unsigned char _rmsWindow, unsigned char _adcNob, bool _blr, bool _mode) {
+void Rms::begin(float _range, uint32_t _rmsWindow, uint8_t _adcNob, bool _blr, bool _mode) {
 	mode = _mode;
 	rmsWindow = _rmsWindow;
 	blr = _blr;
-	dcBias = pow(2, _adcNob) / 2;	// dc-bias starting value
+	dcBias = 1 << (_adcNob - 1) ;	// dc-bias starting value
 	scalingSq = sq(_range) / (float)(_rmsWindow * pow(2, 2*_adcNob));
 	temp_sumSqInstVal=0;
 	sampleIdx=0;
 }
 
 
-void Rms2::begin(float _range, unsigned char _rmsWindow, unsigned char _adcNob, bool _blr, bool _mode) {
+void Rms2::begin(float _range, uint32_t _rmsWindow, uint8_t _adcNob, bool _blr, bool _mode) {
 	mode = _mode;
 	blr = _blr;
 	rmsWindow = _rmsWindow;
-	dcBias = pow(2, _adcNob) / 2;	// dc-bias starting value
+	dcBias = 1 << (_adcNob - 1) ;	// dc-bias starting value
 	scalingSq = sq(_range) / (float)(_rmsWindow * pow(2, 2*_adcNob));
 	temp_sumSqInstVal=0;
 	sampleIdx=0;
 }
 
 
-void Power::begin(float _range1, float _range2, unsigned char _rmsWindow, unsigned char _adcNob, bool _blr, bool _mode) {
+void Power::begin(float _range1, float _range2, uint32_t _rmsWindow, uint8_t _adcNob, bool _blr, bool _mode) {
 	mode = _mode;
 	blr = _blr;
 	rmsWindow = _rmsWindow;
@@ -107,7 +107,7 @@ void Power::begin(float _range1, float _range2, unsigned char _rmsWindow, unsign
 }
 
 
-void Power2::begin(float _range1, float _range2, unsigned char _rmsWindow, unsigned char _adcNob, bool _blr, bool _mode) {
+void Power2::begin(float _range1, float _range2, uint32_t _rmsWindow, uint8_t _adcNob, bool _blr, bool _mode) {
 	mode = _mode;
 	blr = _blr;
 	rmsWindow = _rmsWindow;
