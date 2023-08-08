@@ -69,12 +69,12 @@ void Average::begin(float _range, uint32_t _avgWindow, unsigned char _adcNob, bo
 }
 
 
-void Rms::begin(float _range, uint32_t _rmsWindow, unsigned char _adcNob, bool _blr, bool _mode) {
+void Rms::begin(double _range, uint32_t _rmsWindow, unsigned char _adcNob, bool _blr, bool _mode) {
 	mode = _mode;
 	rmsWindow = _rmsWindow;
 	blr = _blr;
 	dcBias = pow(2, _adcNob) / 2;	// dc-bias starting value
-	scalingSq = sq(_range) / (float)(_rmsWindow * pow(2, 2*_adcNob));
+	scalingSq = sq(_range) / (double)(_rmsWindow * pow(2, 2*_adcNob));
 	temp_sumSqInstVal=0;
 	sampleIdx=0;
 }
@@ -209,7 +209,7 @@ void Rms::update(int _instVal) {
 		else {
 			instVal=_instVal;
 		}
-		temp_sumSqInstVal += sq((float)instVal);
+		temp_sumSqInstVal += sq((double)instVal);
 		if(sampleIdx == rmsWindow) {
 			sumSqInstVal=temp_sumSqInstVal;
 			if(blr) {

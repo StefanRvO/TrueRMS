@@ -71,13 +71,13 @@ private:
 class Rms
 {
 public:
-	void begin(float _range, uint32_t _rmsWindow, uint8_t _adcNob, bool _blr, bool _mode);
+	void begin(double _range, uint32_t _rmsWindow, uint8_t _adcNob, bool _blr, bool _mode);
 	void start(void);
 	void stop(void);
 	void update(int _instVal);
 	void publish(void);
 	int instVal;
-	float rmsVal;
+	double rmsVal;
 	int dcBias;
 	bool acquire;
 	bool acqRdy;
@@ -85,16 +85,16 @@ public:
 	bool blr; // baseline restoration switch
 	bool mode;
 	uint32_t rmsWindow;
-	float const alpha=0.7; // baseline restoration filter constant
+	double const alpha=0.7; // baseline restoration filter constant
 	int error;
 	uint32_t sampleIdx;
-	float scaling;
-	float scalingSq;
-	float msVal;
-	float sumInstVal;
-	float temp_sumInstVal;
-	float temp_sumSqInstVal;
-	float sumSqInstVal;
+	double scaling;
+	double scalingSq;
+	double msVal;
+	double sumInstVal;
+	double temp_sumInstVal;
+	double temp_sumSqInstVal;
+	double sumSqInstVal;
 };
 
 
