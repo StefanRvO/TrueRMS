@@ -61,7 +61,7 @@ private:
 	bool mode;
 	int avgWindow;
 	float scaling;
-	short sampleIdx;
+	uint32_t sampleIdx;
 	uint64_t temp_sumInstVal;
 	long sumInstVal;
 };
@@ -81,7 +81,7 @@ public:
 	int dcBias;
 	bool acquire;
 	bool acqRdy;
-private:
+public:
 	bool blr; // baseline restoration switch
 	bool mode;
 	uint32_t rmsWindow;
@@ -157,7 +157,7 @@ private:
 	float const alpha=0.7;
 	int error1;
 	int error2;
-	short sampleIdx;
+	uint32_t sampleIdx;
 	float scaling1;
 	float scalingSq1;
 	float scaling2;
@@ -211,7 +211,7 @@ private:
 	float const alpha=0.7;
 	int error1;
 	int error2;
-	short sampleIdx;
+	uint32_t sampleIdx;
 	float scaling1;
 	float scalingSq1;
 	float scaling2;
